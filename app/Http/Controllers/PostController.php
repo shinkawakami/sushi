@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Prefecture;
 use App\Models\Cost;
+use Cloudinary;
 
 class PostController extends Controller
 {
@@ -27,11 +28,14 @@ class PostController extends Controller
         
     }
     
+    
 
 
     public function store(Post $post, Request $request)
     {
         $input = $request['post'];
+        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        $input += ['image_url' => $image_url]; 
         $post->fill($input)->save();
         return redirect('/posts/' . $post->id);
     }

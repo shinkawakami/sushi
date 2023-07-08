@@ -15,7 +15,7 @@
                 <div>
                 <h2 style="font-size:15px">カテゴリー</h2>
                 <select name="post[prefecture_id]" style="border-radius: 5px;padding: 10px;border: 1px solid #ccc;">
-                    @foreach($prefecturs as $prefecture)
+                    @foreach($prefectures as $prefecture)
                         <option value="{{ $prefecture->id }}">{{ $prefecture->name }}</option>
                     @endforeach
                     <br>

@@ -12,18 +12,17 @@
             @csrf
         <select name="prefecture">
             <option value="">旅行先を選択してください</option>
-            @foreach ($prefectures as $prefecture)
-                <option value="{{ $prefecture->id }}">{{ $prefecture->name }}</option>
+            @foreach ($posts as $post)
+                <option value="{{ $post->prefecture->id }}">{{ $post->prefecture->name }}</option>
             @endforeach
         </select>
         <select name="costs">
             <option value="">予算を選択してください</option>
-            @foreach ($consts as $cost)
-                <option value="{{ $cost->id }}">{{ $cost->cost }}</option>
+            @foreach ($posts as $post)
+                <option value="{{ $post->cost->id }}">{{ $post->cost->cost }}</option>
             @endforeach
         </select>
         <input type="buttun" value="検索"/>
-        
         <h1>チーム開発会へようこそ！</h1>
         <h2>投稿一覧画面</h2>
         <a href='/posts/create'>新規投稿</a>

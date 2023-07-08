@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Prefecture;
+use App\Models\Cost;
 
 class PostController extends Controller
 {
@@ -18,10 +20,14 @@ class PostController extends Controller
         return view('posts/show')->with(['post' => $post]);
     }
 
-    public function create(Category $category)
+    public function create(Prefecture $prefecture)
     {
-        return view('posts/create')->with(['categories' => $category->get()]);
+        return view('posts/create')->with(['prefectures' => $prefecture->get()]);
+        
+        
     }
+    
+
 
     public function store(Post $post, Request $request)
     {

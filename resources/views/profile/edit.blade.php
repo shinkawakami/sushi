@@ -11,6 +11,7 @@
         <div>
             <p>ユーザーネーム：{{ $user->name }}</p>
             <p>自己紹介：</p>
+            <p>ユーザーネーム：{{ $user->name }}</p>
             @foreach ($posts as $post)
                 <div style='border:solid 1px; margin-bottom: 10px;'>
                     <p>

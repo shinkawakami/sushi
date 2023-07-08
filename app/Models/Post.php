@@ -12,6 +12,8 @@ class Post extends Model
     protected $fillable = [
         'title',
         'body',
+        'image',
+        'date',
         'category_id',
     ];
 
@@ -24,5 +26,25 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function prefecture()
+    {
+        return $this->belongsTo(Prefecture::class);
+    }
+    
+    public function cost()
+    {
+        return $this->belongsTo(Cost::class);
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

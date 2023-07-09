@@ -28,11 +28,11 @@
                 @endforeach
                 </select>
                 </div>
-                <h2 style="font-size:15px;font-weight: bold;">行った場所</h2>
+                <h2 style="font-size:15px;font-weight: bold;margin-top:10px;">行った場所</h2>
                 <input type="text" name="post[title]" placeholder="場所を教えてください" value="{{ old('post.title') }}"  style="border-radius: 5px;padding: 10px;border: 1px solid #ccc;"/>
                 <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
                 <div>
-                <h2 style="font-size:15px;font-weight: bold;">旅行内容</h2>
+                <h2 style="font-size:15px;font-weight: bold;margin-top:10px;">旅行内容</h2>
                 <textarea name="post[body]" placeholder="旅行の内容を教えてください" style="border-radius: 5px;padding: 10px;border: 1px solid #ccc;min-width: 500px;min-height: 100px;" >{{ old('post.body') }}</textarea>
 
                 <div style="border-radius: 5px;padding: 10px; solid #ccc;">
@@ -50,7 +50,7 @@
                 <input type="file" name="image" >
             </div>
 
-            <input type="submit" value="保存" style="margin-top:10px;display: inline-block;color: #fff;font-weight: bold;background-color: #333;text-align: center;padding: 8px 15px;text-decoration: none;border-radius: 5px;">
+            <input type="submit" value="保存" style="margin-top:10px;display: inline-block;color: #fff;font-weight: bold;background-color: #333;text-align: center;padding: 8px 15px;text-decoration: none;border-radius: 5px;cursor: pointer;box-shadow: 0 0 0 #bbb;background-color: 333;transition: .3s;">
             <div style=" display: inline-block;color: #fff;font-weight: bold;background-color: #333;padding: 8px 15px;text-decoration: none;border-radius: 5px;"><a href="/">戻る</a></div>
         </div>    
 

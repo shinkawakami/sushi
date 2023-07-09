@@ -13,14 +13,14 @@
         <form class="search">
             @csrf
         <select name="prefecture">
-            <option value="">旅行先を選択してください</option>
+            <option value="">旅行先</option>
             @foreach ($prefectures as $prefecture)
 
                 <option value="{{ $prefecture->id }}">{{ $prefecture->name }}</option>
             @endforeach
         </select>
         <select name="costs">
-            <option value="">予算を選択してください</option>
+            <option value="">予算</option>
 
             @foreach ($costs as $cost)
                 <option value="{{ $cost->id }}">{{ $cost->cost }}</option>
@@ -35,12 +35,16 @@
         <div class="container">
         @foreach($posts as $post)
             <div class="postcontent">
-                    <h3><a href="/posts/{{ $post->id }}">{{$post->title}}</a></h5>
-                    <p>{{$post->body}}</p><br>
-                    
-                    <div class="user">
-                         <a href="/users/{{ $post->user->id }}">{{ $post->user->name }}</a>
-                    </div>
+                <div>
+                <img src="{{ $post->image_url }} " alt="画像が読み込めません。"/>
+                </div>
+                <h2><a href="/posts/{{ $post->id }}">{{$post->title}}</a></h2>
+                <p>{{$post->body}}</p><br>
+                
+                <div class="user">
+                <a href="/users/{{ $post->user->id }}">{{ $post->user->name }}</a>
+                </div>
+            </div>
         @endforeach
         </div>
         

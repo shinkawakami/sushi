@@ -21,3 +21,30 @@
     text-align: right;
 }
 
+.postimg {
+    position: relative;
+    height: 200px;
+    width: 95%;
+    margin: 20px auto 0;
+    overflow: hidden;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.postimg img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100%; 
+}
+
+.postimg img:hover {
+    transition: .2s;
+    opacity: .5;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+}

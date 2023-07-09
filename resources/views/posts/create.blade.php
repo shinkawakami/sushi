@@ -13,14 +13,14 @@
                 <div>
                 <h2 style="font-size:15px;font-weight: bold;">カテゴリー</h2>
 
-                <select name="post[prefecture_id]"  style="border-radius: 5px;padding: 10px;border: 1px solid #ccc;">
+                <select name="post[prefecture_id]"  style="border-radius: 5px;padding: 10px;border: 1px solid #ccc; width:60%;">
                 <option value="">旅行先を選択してください</option>
                 @foreach ($prefectures as $prefecture)
 
                 <option value="{{ $prefecture->id }}">{{ $prefecture->name }}</option>
                 @endforeach
                 </select>
-                <select name="post[cost_id]"  style="border-radius: 5px;padding: 10px;border: 1px solid #ccc;">
+                <select name="post[cost_id]"  style="margin-top:10px;border-radius: 5px;padding: 10px;border: 1px solid #ccc; width:60%;">
                 <option value="">予算を選択してください</option>
 
                     @foreach ($costs as $cost)
@@ -29,7 +29,7 @@
                 </select>
                 </div>
                 <h2 style="font-size:15px;font-weight: bold;margin-top:10px;">行った場所</h2>
-                <input type="text" name="post[title]" placeholder="場所を教えてください" value="{{ old('post.title') }}"  style="border-radius: 5px;padding: 10px;border: 1px solid #ccc;"/>
+                <input type="text" name="post[title]" placeholder="場所を教えてください" value="{{ old('post.title') }}"  style="border-radius: 5px;padding: 10px;border: 1px solid #ccc;width:60%"/>
                 <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
                 <div>
                 <h2 style="font-size:15px;font-weight: bold;margin-top:10px;">旅行内容</h2>

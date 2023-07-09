@@ -17,9 +17,9 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        $user = Auth::user();
-        $posts = Post::where('user_id', $user->id)->get();
-        return view('profile.edit')->with(['posts' => $posts, 'user' => $user]);
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
     }
 
     /**
@@ -57,5 +57,28 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+    
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        $posts = Post::where('user_id', $user->id)->get();
+        return view('profile')->with(['posts' => $posts, 'user' => $user]);
+    }
+    
+    public function introduction(Request $request)
+    {
+        $user = Auth::user();
+        $input_introduction = $request['user_introduction'];
+        $user->content = $input_introduction;
+        $user->save();
+        return redirect()->back();
+    }
+    
+    public function postByDate($date)
+    {
+        $posts = Post::whereDate('date', $date)->get();
+
+        return view('posts.showMyPost', ['posts' => $posts]);
     }
 }

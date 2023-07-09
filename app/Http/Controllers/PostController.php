@@ -11,12 +11,15 @@ use Cloudinary;
 
 class PostController extends Controller
 {
-    public function index(Post $post)
+    public function index(Post $post, Prefecture $prefecture, Cost $cost)
     {
-        $posts = Post::all();
-        $prefecture = Prefecture::all();
-        $costs = Cost::all();
-        return view('posts/index')->with(['posts' => $posts, 'prefectures' => $prefecture, 'costs' =>$costs]);
+
+        return view('posts/index')->with([
+            'posts' => $post->getPaginateByLimit(),
+            'prefectures' => $prefecture->get(),
+            'costs' => $cost->get()
+            ]);
+
     }
 
     public function show(Post $post)

@@ -22,10 +22,27 @@ class Post extends Model
 
     ];
 
-    public function getPaginateByLimit(int $limit_count = 5)
+    public function getPaginateByLimit(int $limit_count = 10)
     {
         // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this::with('category')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+        //return $this::with(['category', 'cost', 'prefecture'])->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    
+        $prefecture_id = request('prefecture'); // ユーザーID
+        $cost_id = request('cost'); // カテゴリーID
+        
+        return $this::with('prefecture', 'cost')
+            ->when($prefecture_id, function ($query) use ($prefecture_id) {
+                return $query->whereHas('prefecture', function ($query) use ($prefecture_id) {
+                    $query->where('id', $prefecture_id);
+                });
+            })
+            ->when($cost_id, function ($query) use ($cost_id) {
+                return $query->whereHas('cost', function ($query) use ($cost_id) {
+                    $query->where('id', $cost_id);
+                });
+            })
+            ->orderBy('updated_at', 'DESC')
+            ->paginate($limit_count);
     }
 
     public function category()

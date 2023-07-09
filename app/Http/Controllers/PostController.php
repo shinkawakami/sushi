@@ -84,5 +84,17 @@ class PostController extends Controller
 
         return redirect('/posts/' . $post->id);
     }
+    
+    public function comment(Request $request, Post $post)
+    {
+        $user = $request->user();
+        $comment = new Comment();
+        $comment->body = $request->input('post_comment');
+        $comment->user()->associate($user);
+        $comment->post()->associate($post);
+        $comment->save();
+        
+        return redirect('/posts/' . $post->id);
+    }
 
 }

@@ -12,6 +12,17 @@
                 <p>タイトル：{{ $post->title }}</p>
                 <p>本文：{{ $post->body }}</p>
                 <img src="{{ $post->image_url }}" alt="画像が読み込めません。"/>
+                @foreach ($post->comments as $comment)
+                    <p>コメント：{{ $comment->body }}</p>
+                @endforeach
+            </div>
+            <div>
+                <form action="/posts" method="POST">
+                    @csrf
+                    <label for="post-comment">コメント</label>
+                    <input type="text" name="post_comment" required maxlength="20">
+                    <input type="submit" value="保存">
+                </form>
             </div>
             <div>
                 <p class="edit">[<a href="/posts/{{ $post->id }}/edit">編集</a>]</p>

@@ -34,32 +34,39 @@
         <div class="container">
         @foreach($posts as $post)
             <div class="postcontent">
-                <div>
-                <img src="{{ $post->image_url }} " alt="画像が読み込めません。"/>
+                <div class="postimg">
+                <a href="/posts/{{ $post->id }}"><img src="{{ $post->image_url }} " alt="画像が読み込めません。"/></a>
                 </div>
-                <h2　class="title" style="margin-bottom:5px;"><a href="/posts/{{ $post->id }}">{{$post->title}}</a></h2>
+                <h2 class="title" style="margin-bottom:5px;"><a href="/posts/{{ $post->id }}">{{$post->title}}</a></h2>
                 <p>{{$post->body}}</p><br>
                 
                 <div class="user">
                 <a href="/myPosts" style="display: inline-block;">投稿者：{{ $post->user->name }}</a>
                 </div>
-                @if(Auth::check() && $post->user_id == Auth::user()->id)
+                 @if(Auth::check() && $post->user_id == Auth::user()->id)
                     <div class="delete">
-                        <form id="delete-{{ $post->id }}" action="/posts/{{ $post->id }}" method="POST";>            
-                        @csrf
-                        @method('DELETE')
-                            <x-secondary-button onclick="if(confirm('本当に削除しますか？')) {
-                            event.preventDefault(); document.getElementById('delete-{{ $post->id }}').submit(); 
-                            }">削除</x-secondary-button>
-                        </form>
+                    <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="button" onclick="deletePost({{ $post->id }})" style="cursor: pointer;margin-top:10px;display: inline-block;color: #fff;font-weight: bold;background-color: #333;text-align: center;padding: 8px 15px;text-decoration: none;border-radius: 5px;">削除</button> 
+                    </form>
                     </div>
-                    @endif
-            </div>
+                @endif
+            </div> 
         @endforeach
         </div>
         <div style="margin-left:50px"><a href="/">トップ画面にもどる</a></div>
         <div>
         
         </div>
+        <script>
+    function deletePost(id) {
+        'use strict'
+
+        if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
+            document.getElementById(`form_${id}`).submit();
+        }
+    }
+</script>
     </x-app-layout>
 </html>

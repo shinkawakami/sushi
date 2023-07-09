@@ -7,17 +7,19 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Prefecture;
 use App\Models\Cost;
+use Cloudinary;
 
 class PostController extends Controller
 {
     public function index(Post $post, Prefecture $prefecture, Cost $cost)
     {
-        //dd($post->getPaginateByLimit()->find(1));
+
         return view('posts/index')->with([
             'posts' => $post->getPaginateByLimit(),
             'prefectures' => $prefecture->get(),
             'costs' => $cost->get()
             ]);
+
     }
 
     public function show(Post $post)
@@ -25,19 +27,48 @@ class PostController extends Controller
         return view('posts/show')->with(['post' => $post]);
     }
 
-    public function create(Prefecture $prefecture)
+    public function create()
     {
-        return view('posts/create')->with(['prefectures' => $prefecture->get()]);
-        
-        
+        $prefecture = Prefecture::all();
+        $costs = Cost::all();
+        return view('posts/create')->with(['prefectures' => $prefecture, 'costs' =>$costs]);
     }
+    
     
 
 
-    public function store(Post $post, Request $request)
+    public function store(Request $request)
     {
+
         $input = $request['post'];
+        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        $input += ['image_url' => $image_url]; 
         $post->fill($input)->save();
+      
+        $validatedData = $request->validate([
+            'post_title' => 'required|string',
+            'post_body' => 'required|string',
+            'post_prefecture_id' => 'required',
+            'post_cost_id' => 'required',
+            'post_date' => 'required',
+        ]);
+        
+        $user = $request->user();
+        $prefectureId = $request->input('post_prefecture_id');
+        $costId = $request->input('post_cost_id');
+        $prefecture = Prefecture::findOrFail($prefectureId);
+        $cost = Cost::findOrFail($costId);
+        $date = $request->input('post_date');
+        
+        $post = new Post();
+        $post->title = $request->input('post_title');
+        $post->body = $request->input('post_body');
+        $post->user()->associate($user);
+        $post->prefecture()->associate($prefecture);
+        $post->cost()->associate($cost);
+        $post->date = $date;
+        $post->save();
+
         return redirect('/posts/' . $post->id);
     }
 

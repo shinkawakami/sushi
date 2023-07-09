@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('prefecture_id')->constrained();
             $table->foreignId('cost_id')->constrained();
-            $table->string('image')->nullable();
+            $table->string('image_url')->nullable();
             $table->date('date');
         });
     }

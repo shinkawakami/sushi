@@ -22,7 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
+    
+    protected $attributes = [
+        'content' => null,
+    ];
     /**
      * The attributes that should be hidden for serialization.
      *

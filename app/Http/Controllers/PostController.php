@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Prefecture;
 use App\Models\Cost;
+use App\Models\Comment;
 use Cloudinary;
 
 class PostController extends Controller
@@ -33,9 +34,6 @@ class PostController extends Controller
         $costs = Cost::all();
         return view('posts/create')->with(['prefectures' => $prefecture, 'costs' =>$costs]);
     }
-    
-    
-
 
     public function store(Request $request)
     {

@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Prefecture;
 use App\Models\Cost;
+use Cloudinary;
 
 class PostController extends Controller
 {
@@ -30,10 +31,17 @@ class PostController extends Controller
         return view('posts/create')->with(['prefectures' => $prefecture, 'costs' =>$costs]);
     }
     
+    
 
 
     public function store(Request $request)
     {
+
+        $input = $request['post'];
+        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        $input += ['image_url' => $image_url]; 
+        $post->fill($input)->save();
+      
         $validatedData = $request->validate([
             'post_title' => 'required|string',
             'post_body' => 'required|string',
@@ -57,6 +65,7 @@ class PostController extends Controller
         $post->cost()->associate($cost);
         $post->date = $date;
         $post->save();
+
         return redirect('/posts/' . $post->id);
     }
 

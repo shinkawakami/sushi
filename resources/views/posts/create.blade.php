@@ -13,14 +13,14 @@
                 <div>
                 <h2 style="font-size:15px">カテゴリー</h2>
 
-                <select name="prefecture">
+                <select name="post[prefecture_id]">
                 <option value="">旅行先を選択してください</option>
                 @foreach ($prefectures as $prefecture)
 
                 <option value="{{ $prefecture->id }}">{{ $prefecture->name }}</option>
                 @endforeach
                 </select>
-                <select name="costs">
+                <select name="post[cost_id]">
                 <option value="">予算を選択してください</option>
 
                     @foreach ($costs as $cost)
@@ -41,7 +41,7 @@
                 <div>
 
                     <label for="post_date">日付</label>
-                    <input type="date" id="post_date" name="post_date" required>
+                    <input type="date" id="post_date" name="post[date]" required>
                     <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                 </div>
 

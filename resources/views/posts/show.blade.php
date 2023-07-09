@@ -17,7 +17,7 @@
                 @endforeach
             </div>
             <div>
-                <form action="/posts" method="POST">
+                <form action="/posts/{{$post->id}}" method="POST">
                     @csrf
                     <label for="post-comment">コメント</label>
                     <input type="text" name="post_comment" required maxlength="20">

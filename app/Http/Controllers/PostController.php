@@ -43,32 +43,12 @@ class PostController extends Controller
         $input = $request['post'];
         $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
         $input += ['image_url' => $image_url]; 
-        $post->fill($input)->save();
-      
-        $validatedData = $request->validate([
-            'post_title' => 'required|string',
-            'post_body' => 'required|string',
-            'post_prefecture_id' => 'required',
-            'post_cost_id' => 'required',
-            'post_date' => 'required',
-        ]);
-        
         $user = $request->user();
-        $prefectureId = $request->input('post_prefecture_id');
-        $costId = $request->input('post_cost_id');
-        $prefecture = Prefecture::findOrFail($prefectureId);
-        $cost = Cost::findOrFail($costId);
-        $date = $request->input('post_date');
-        
+        $input += ['user_id' => $user->id]; 
         $post = new Post();
-        $post->title = $request->input('post_title');
-        $post->body = $request->input('post_body');
-        $post->user()->associate($user);
-        $post->prefecture()->associate($prefecture);
-        $post->cost()->associate($cost);
-        $post->date = $date;
-        $post->save();
-
+        $post->fill($input)->save();
+        
+    
         return redirect('/posts/' . $post->id);
     }
 

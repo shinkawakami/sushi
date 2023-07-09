@@ -36,7 +36,7 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::post('/posts', 'store')->name('post.store');
     Route::get('/posts/create', 'create')->name('post.create');
     Route::get('/posts/{post}', 'show')->name('post.show');
-    Route::post('/post/{post}', 'comment')->name('post.comment');
+    Route::post('/posts/{post}', 'comment')->name('post.comment');
     Route::put('/posts/{post}', 'update')->name('post.update');
     Route::delete('/posts/{post}', 'delete')->name('post.delete');
     Route::get('/posts/{post}/edit', 'edit')->name('post.edit');

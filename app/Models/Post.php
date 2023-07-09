@@ -14,7 +14,7 @@ class Post extends Model
         'body',
         'image',
         'date',
-        'category_id',
+        'user_id',
         'prefecture_id',
         'cost_id',
         'image_url', 

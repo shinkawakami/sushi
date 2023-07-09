@@ -47,7 +47,7 @@
             </div>
         @endforeach
         </div>
-        
+        <div style="margin-left:50px"><a href="/">トップ画面にもどる</a></div>
         <div>
         
         </div>

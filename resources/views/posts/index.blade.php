@@ -5,6 +5,7 @@
         <title>Blog</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="/css/layout.css" rel="stylesheet">
     </head>
     <body>
         <!--旅行先と予算から検索するフォーム-->
@@ -12,38 +13,35 @@
             @csrf
         <select name="prefecture">
             <option value="">旅行先を選択してください</option>
-            @foreach ($posts as $post)
-                <option value="{{ $post->prefecture->id }}">{{ $post->prefecture->name }}</option>
+            @foreach ($prefectures as $prefectuire)
+                <option value="{{ $prefecture->id }}">{{ $prefecture->name }}</option>
             @endforeach
         </select>
         <select name="costs">
             <option value="">予算を選択してください</option>
-            @foreach ($posts as $post)
-                <option value="{{ $post->cost->id }}">{{ $post->cost->cost }}</option>
+            @foreach ($costs as $cost)
+                <option value="{{ $cost->id }}">{{ $cost->cost }}</option>
             @endforeach
         </select>
-        <input type="buttun" value="検索"/>
+        <input type="submit" value="検索"/>
         <h1>チーム開発会へようこそ！</h1>
         <h2>投稿一覧画面</h2>
         <a href='/posts/create'>新規投稿</a>
-        <div>
-            <table>
-                <tbody>
-                @foreach ($posts->chunk(3) as $chuck)
-                    <tr>
-                    @foreach($chunk as $post)
-                        <td>
-                        <p>
-                            タイトル：<a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
-                        </p>
-                        <p> 本文：<a href="/posts/{{ $post->id }}">{{ $post->body }}</a></p>
-                        <p>カテゴリー：<a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a></p>
-                    @endforeach
-                    </tr>
-                @endforeach
-                 </tbody>
-            </table>
+        
+        <div class="container">
+        @foreach($posts as $post)
+            <div class="postcontent">
+                    <h3><a href="/posts/{{ $post->id }}">{{$post->title}}</a></h5>
+                    <p>{{$post->body}}</p><br>
+                    <div class="category">
+                        <a href="/categories/{{ $post->category->id }}">カテゴリ：{{ $post->category->name }}</a>
+                    </div>
+                    <div class="user">
+                         <a href="/users/{{ $post->user->id }}">{{ $post->user->name }}</a>
+                    </div>
+        @endforeach
         </div>
+        
         <div>
             {{ $posts->links() }}
         </div>

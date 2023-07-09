@@ -10,9 +10,14 @@ use App\Models\Cost;
 
 class PostController extends Controller
 {
-    public function index(Post $post)
+    public function index(Post $post, Prefecture $prefecture, Cost $cost)
     {
-        return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);
+        //dd($post->getPaginateByLimit()->find(1));
+        return view('posts/index')->with([
+            'posts' => $post->getPaginateByLimit(),
+            'prefectures' => $prefecture->get(),
+            'costs' => $cost->get()
+            ]);
     }
 
     public function show(Post $post)

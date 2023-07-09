@@ -7,13 +7,12 @@
         </x-slot>
         <h1></h1>
         <h2>投稿作成</h2>
-        <form action="/posts" method="POST" enctype="multipart/form-data" style="border: 5px double #aaa;
-
-  padding: 2em;">
+        <form action="/posts" method="POST" enctype="multipart/form-data" style="border: 5px double #aaa;padding: 2em;">
             @csrf
             <div>
                 <div>
                 <h2 style="font-size:15px">カテゴリー</h2>
+
                 <select name="prefecture">
                 <option value="">旅行先を選択してください</option>
                 @foreach ($prefectures as $prefecture)
@@ -37,17 +36,23 @@
                 <textarea name="post[body]" placeholder="旅行の内容を教えてください" style="border-radius: 5px;padding: 10px;border: 1px solid #ccc;min-width: 500px;min-height: 100px;" >{{ old('post.body') }}</textarea>
 
                 <div style="border-radius: 5px;padding: 10px; solid #ccc;">
+
+                </div>
+                <div>
+
                     <label for="post_date">日付</label>
                     <input type="date" id="post_date" name="post_date" required>
                     <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                 </div>
+
             </div>
             <div class="image" style="margin-top:10px;">
                 <input type="file" name="image" >
             </div>
 
             <input type="submit" value="保存" style="margin-top:10px;display: inline-block;color: #fff;font-weight: bold;background-color: #333;text-align: center;padding: 8px 15px;text-decoration: none;border-radius: 5px;">
-        </div>
+        </div>    
+
         </form>
         <div style="margin-left:50px"><a href="/">戻る</a></div>
     </x-app-layout>

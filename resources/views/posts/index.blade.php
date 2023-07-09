@@ -37,9 +37,7 @@
             <div class="postcontent">
                     <h3><a href="/posts/{{ $post->id }}">{{$post->title}}</a></h5>
                     <p>{{$post->body}}</p><br>
-                    <div class="category">
-                        <a href="/categories/{{ $post->category->id }}">カテゴリ：{{ $post->category->name }}</a>
-                    </div>
+                    
                     <div class="user">
                          <a href="/users/{{ $post->user->id }}">{{ $post->user->name }}</a>
                     </div>

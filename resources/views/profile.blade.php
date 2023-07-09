@@ -11,17 +11,20 @@
             <script src='https://fullcalendar.io/js/fullcalendar-3.1.0/fullcalendar.min.js'></script>
         
             <!-- Styles -->
+            
             <link href='https://fullcalendar.io/js/fullcalendar-3.1.0/fullcalendar.min.css' rel='stylesheet' />
         </x-slot>
-            <h1>プロフィール</h1>
+        
+            <div style=>
+            <h1 style="margin-left:30px;font-size:30px"></h1>ロフィール</h1>
             <div>
-                <p>ユーザーネーム：{{ $user->name }}</p>
+                <p style="margin-left:30px;">ユーザーネーム：{{ $user->name }}</p>
                 <form action="/myPosts" method="POST">
                     @csrf
                     @method('PUT')
-                    <label for="user-intoduction">自己紹介</label>
-                    <input type="text" name="user_introduction" required maxlength="100" value="{{ $user->content }}">
-                    <input type="submit" value="保存">
+                    <label for="user-intoduction" style="margin-left:30px;">自己紹介</label>
+                    <input type="text" name="user_introduction" required maxlength="100" value="{{ $user->content }}" style="margin-left:30px;">
+                    <input type="submit" value="保存" style="margin-left:30px;">
                 </form>
                 
                 @foreach ($posts as $post)
@@ -60,4 +63,5 @@
                 
             </div>
     </x-app-layout>
+    </div>
 </html>
